@@ -1,12 +1,28 @@
-# Act configuration - optimized for Godot CI testing
+# Act configuration - for local CI testing
 # https://github.com/nektos/act
+#
+# QUICK START:
+#   act -j test          # Run tests locally
+#   act -j lint          # Run linting locally
+#   act -j build-web     # Run build locally
+#
+# DOCKER AUTH FIX (for "username=" error):
+#   rm ~/.docker/config.json
+#
+# If you get Docker auth errors, clear your Docker credentials:
+#   docker logout
+#   rm ~/.docker/config.json
 
-# Image with all necessary tools (unzip, git, curl, etc.)
-# catthehacker/ubuntu:act-latest has everything GitHub Actions needs
+# Image with all GitHub Actions tools pre-installed
+# This is large (~5GB) but has everything needed including unzip, git, curl
 -P ubuntu-latest=catthehacker/ubuntu:act-latest
 
 # Required for Apple Silicon Macs (M1/M2/M3)
 --container-architecture linux/amd64
 
-# Skip pulling if image exists locally (faster)
+# Skip pulling if image exists locally (faster after first run)
 --pull=false
+
+# Alternative: Use ubuntu:22.04 for faster/smaller downloads
+# But you'll need to skip jobs that require unzip (setup-godot action)
+# -P ubuntu-latest=ubuntu:22.04
