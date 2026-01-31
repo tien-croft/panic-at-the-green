@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 env:
   GODOT_VERSION: 4.6.0
   EXPORT_NAME: panic-at-the-green
@@ -94,16 +99,27 @@ jobs:
     - name: Create Build Directory
       run: mkdir -p build
 
-    - name: Setup Export Templates
+    - name: Download and Install Export Templates
       run: |
-        mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-        # Note: In production, download templates from https://downloads.tuxfamily.org/godotengine/
-        echo "Export templates should be downloaded manually or cached"
+        EXPORT_TEMPLATE_VERSION="${GODOT_VERSION}.stable"
+        TEMPLATE_URL="https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+        TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${EXPORT_TEMPLATE_VERSION}"
+
+        echo "Downloading export templates from $TEMPLATE_URL"
+        mkdir -p "$TEMPLATE_DIR"
+        curl -L "$TEMPLATE_URL" -o /tmp/godot_templates.tpz
+
+        echo "Extracting templates..."
+        unzip -q /tmp/godot_templates.tpz -d "$TEMPLATE_DIR"
+        rm /tmp/godot_templates.tpz
+
+        echo "Templates installed to $TEMPLATE_DIR"
+        ls -la "$TEMPLATE_DIR"
 
     - name: Build Web Export
       run: |
-        godot --headless --export-release "Web" ./build/index.html || echo "Build requires export templates"
-      continue-on-error: true
+        godot --headless --export-release "Web" ./build/index.html
+      timeout-minutes: 10
 
     - name: Upload Build Artifact
       if: always()
@@ -112,3 +128,33 @@ jobs:
         name: web-export
         path: build/
         if-no-files-found: warn
+
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build-web
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - name: Download Build Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: web-export
+        path: build/
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: build/
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
