@@ -115,12 +115,23 @@ jobs:
         unzip -q /tmp/godot_templates.tpz -d /tmp/templates
         rm /tmp/godot_templates.tpz
 
-        # Move templates from nested directory to correct location
-        if [ -d "/tmp/templates/templates" ]; then
-          mv /tmp/templates/templates/* "$TEMPLATE_DIR/"
-        else
-          mv /tmp/templates/* "$TEMPLATE_DIR/"
+        # Find the directory containing the templates (look for version.txt)
+        SOURCE_DIR=$(find /tmp/templates -name "version.txt" -exec dirname {} \; | head -n 1)
+
+        if [ -z "$SOURCE_DIR" ]; then
+          echo "version.txt not found, looking for web_debug.zip"
+          SOURCE_DIR=$(find /tmp/templates -name "web_debug.zip" -exec dirname {} \; | head -n 1)
         fi
+
+        if [ -n "$SOURCE_DIR" ]; then
+          echo "Found templates in $SOURCE_DIR"
+          mv "$SOURCE_DIR"/* "$TEMPLATE_DIR/"
+        else
+          echo "ERROR: Could not find templates directory in extracted archive"
+          ls -R /tmp/templates
+          exit 1
+        fi
+
         rm -rf /tmp/templates
 
         echo "Templates installed to $TEMPLATE_DIR"
