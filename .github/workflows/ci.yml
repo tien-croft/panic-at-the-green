@@ -102,12 +102,12 @@ jobs:
     - name: Download and Install Export Templates
       run: |
         EXPORT_TEMPLATE_VERSION="${GODOT_VERSION}.stable"
-        TEMPLATE_URL="https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+        TEMPLATE_URL="https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
         TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${EXPORT_TEMPLATE_VERSION}"
 
         echo "Downloading export templates from $TEMPLATE_URL"
         mkdir -p "$TEMPLATE_DIR"
-        curl -L "$TEMPLATE_URL" -o /tmp/godot_templates.tpz
+        curl -L --retry 3 --retry-delay 5 "$TEMPLATE_URL" -o /tmp/godot_templates.tpz
 
         echo "Extracting templates..."
         unzip -q /tmp/godot_templates.tpz -d "$TEMPLATE_DIR"
