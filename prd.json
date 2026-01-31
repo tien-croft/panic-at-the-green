@@ -31,9 +31,9 @@
         "Unit tests for core simulation logic (test_simulation_core.gd)"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "inProgress": false,
-      "completed": false
+      "completed": true
     },
     {
       "id": "US-003",
