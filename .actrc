@@ -1,0 +1,12 @@
+# Act configuration - optimized for Godot CI testing
+# https://github.com/nektos/act
+
+# Image with all necessary tools (unzip, git, curl, etc.)
+# catthehacker/ubuntu:act-latest has everything GitHub Actions needs
+-P ubuntu-latest=catthehacker/ubuntu:act-latest
+
+# Required for Apple Silicon Macs (M1/M2/M3)
+--container-architecture linux/amd64
+
+# Skip pulling if image exists locally (faster)
+--pull=false
