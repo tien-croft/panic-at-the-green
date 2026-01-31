@@ -104,7 +104,7 @@ jobs:
         # Extract major.minor version (e.g., 4.6.0 -> 4.6)
         GODOT_VERSION_SHORT=$(echo "$GODOT_VERSION" | sed 's/\.[^.]*$//')
         EXPORT_TEMPLATE_VERSION="${GODOT_VERSION}.stable"
-        TEMPLATE_URL="https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION_SHORT}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+        TEMPLATE_URL="https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION_SHORT}-stable/Godot_v${GODOT_VERSION_SHORT}-stable_export_templates.tpz"
         TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${EXPORT_TEMPLATE_VERSION}"
 
         echo "Downloading export templates from $TEMPLATE_URL"
