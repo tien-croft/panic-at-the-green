@@ -1,0 +1,18 @@
+# GDLint configuration file
+# See: https://github.com/Scony/gdtoolkit
+
+# Exclude test files from certain rules
+exclude_paths:
+  - tests/
+
+# Disable rules that don't make sense for test files
+disable_rules:
+  - max-public-methods
+
+# General rules
+max_public_methods: 20
+max_line_length: 100
+max_file_lines: 1000
+max_returns: 6
+max_arguments: 6
+max_class_length: 150

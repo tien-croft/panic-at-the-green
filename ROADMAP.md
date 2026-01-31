@@ -6,14 +6,14 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 
 ## Current Status
 
-**Next Task**: US-002 - Create Simulation Core Singleton
+**Next Task**: US-003 - Build Environment Stats UI
 
 ## Task Board
 
 | ID | Title | Assignee | Status | Notes |
 |:---|:---|:---|:---|:---|
 | US-001 | Initialize Godot Project Structure | opencode | ✅ Complete | Basic structure ready |
-| US-002 | Create Simulation Core Singleton | — | ⏳ Pending | Waiting for agent |
+| US-002 | Create Simulation Core Singleton | opencode | ✅ Complete | All tests passing |
 | US-003 | Build Environment Stats UI | — | ⏳ Pending | — |
 | US-004 | Implement Equipment Base System | — | ⏳ Pending | — |
 | US-005 | Create Heat Pump Equipment | — | ⏳ Pending | — |
@@ -30,6 +30,42 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 ## Lessons Learned & Blockers
 
 ### Session Log
+
+#### 2026-02-01 - Create Simulation Core Singleton (US-002)
+**Agent**: opencode
+**Task**: Create simulation engine that tracks temperature and humidity
+**Status**: ✅ Complete
+
+**What was done**:
+- Created `scripts/simulation_core.gd` as an Autoload singleton
+- Implemented temperature tracking with getter/setter (float, Celsius)
+- Implemented humidity tracking with getter/setter (float, percentage 0-100)
+- Added signals: `temperature_changed`, `humidity_changed` emitted on value changes
+- Implemented time-based decay system for natural condition drift toward targets
+- Created comprehensive unit tests in `tests/unit/test_simulation_core.gd` (21 tests)
+- Updated `project.godot` to register SimulationCore as Autoload
+- Created `.gdlintrc` configuration to exclude test files from certain linting rules
+- All 21 tests passing, formatting and linting verified
+
+**Key decisions**:
+- Used exponential decay formula for natural condition drift (smooth transitions)
+- Temperature has absolute zero validation (-273.15°C minimum)
+- Humidity clamped to 0-100% range
+- Signals only emitted when values actually change (not on same-value sets)
+- Default values: 20°C temperature, 50% humidity
+- Decay rates configurable (default 0.1 per second)
+
+**Test coverage**:
+- Initial values, getters/setters, property setters
+- Signal emission and non-emission when unchanged
+- Boundary conditions (humidity clamping, temperature validation)
+- Target conditions and decay rates configuration
+- Natural decay behavior (gradual change, no overshoot)
+- Error handling (push_error for invalid temperature)
+
+**Blockers encountered**: None
+- All acceptance criteria met
+- Tests, formatting, and linting all pass
 
 #### 2026-02-01 - Test, Lint, Build Infrastructure Setup
 **Agent**: opencode
