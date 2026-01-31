@@ -1,0 +1,97 @@
+# Pre-commit hooks for Panic at the Green
+# Install: make setup-hooks
+# Or: uv tool install pre-commit && pre-commit install
+#
+# These hooks run automatically before each commit to ensure code quality
+
+repos:
+  # Local hooks for GDScript
+  - repo: local
+    hooks:
+      # Static typing check - ensures all code has type annotations (MUST be first)
+      - id: check-typing
+        name: Check static typing
+        entry: .hooks/check-typing.sh
+        language: script
+        files: \.gd$
+        pass_filenames: false
+        stages: [pre-commit]
+        description: Checks that all GDScript files have explicit type annotations
+
+      # Format check - ensures code is properly formatted
+      - id: gdformat-check
+        name: Check GDScript formatting
+        entry: .hooks/check-gdformat.sh
+        language: script
+        files: \.gd$
+        pass_filenames: false
+        stages: [pre-commit]
+        description: Checks if GDScript files are properly formatted using gdformat
+
+      # Lint check - ensures code follows style guidelines
+      - id: gdlint
+        name: Lint GDScript files
+        entry: .hooks/check-gdlint.sh
+        language: script
+        files: \.gd$
+        pass_filenames: false
+        stages: [pre-commit]
+        description: Lints GDScript files for style issues using gdlint
+
+      # Godot file validation - checks project files
+      - id: check-godot-files
+        name: Check Godot project files
+        entry: .hooks/check-godot-files.sh
+        language: script
+        files: '\.(tscn|godot)$'
+        pass_filenames: false
+        stages: [pre-commit]
+        description: Validates Godot scene and project files
+
+  # Standard hooks from pre-commit
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # File checks
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+        stages: [pre-commit]
+
+      - id: check-merge-conflict
+        stages: [pre-commit]
+
+      - id: check-vcs-permalinks
+        stages: [pre-commit]
+
+      - id: forbid-new-submodules
+        stages: [pre-commit]
+
+      # Trailing whitespace and end of file fixes
+      - id: trailing-whitespace
+        stages: [pre-commit]
+
+      - id: end-of-file-fixer
+        stages: [pre-commit]
+
+      # JSON validation
+      - id: check-json
+        files: \.json$
+        stages: [pre-commit]
+
+      # YAML validation
+      - id: check-yaml
+        files: \.(yaml|yml)$
+        stages: [pre-commit]
+
+# Skip certain files
+exclude: |
+  (?x)^(
+    \.godot/.*|
+    .*\.import$|
+    build/.*|
+    addons/.*|
+    assets/.*\.png$|
+    assets/.*\.jpg$|
+    assets/.*\.wav$|
+    assets/.*\.ogg$
+  )$

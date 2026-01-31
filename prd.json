@@ -1,0 +1,243 @@
+{
+  "project": "Panic at the Green",
+  "description": "A 2D greenhouse simulator game where players maintain optimal conditions for growing tomato plants, demonstrating the complexity of real-world crop management",
+  "tasks": [
+    {
+      "id": "US-001",
+      "title": "Initialize Godot Project Structure",
+      "description": "As a developer, I need the basic Godot 4.x project structure set up so we can start building the game.",
+      "acceptanceCriteria": [
+        "project.godot file configured with correct settings",
+        "Directory structure created (scenes/, scripts/, prefabs/, assets/, tests/)",
+        "Main scene (main.tscn) created and set as default",
+        "Basic window settings configured (1152x648 resolution, canvas_items stretch)",
+        "Project runs without errors in Godot editor"
+      ],
+      "priority": 1,
+      "passes": true,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-002",
+      "title": "Create Simulation Core Singleton",
+      "description": "As a player, I need a simulation engine that tracks temperature and humidity so environmental conditions can be monitored and modified.",
+      "acceptanceCriteria": [
+        "simulation_core.gd created as an Autoload singleton",
+        "Temperature tracking with getter/setter (float, Celsius)",
+        "Humidity tracking with getter/setter (float, percentage 0-100)",
+        "Signals emitted when values change: temperature_changed, humidity_changed",
+        "Time-based decay system for natural condition drift",
+        "Unit tests for core simulation logic (test_simulation_core.gd)"
+      ],
+      "priority": 2,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-003",
+      "title": "Build Environment Stats UI",
+      "description": "As a player, I need to see current temperature and humidity on screen so I can make informed decisions about equipment usage.",
+      "acceptanceCriteria": [
+        "UI scene created (environment_ui.tscn)",
+        "Temperature display with clear visual indicator",
+        "Humidity display with clear visual indicator",
+        "Real-time updates when simulation values change",
+        "UI positioned clearly on screen (top corner or sidebar)",
+        "Visual feedback when values are outside optimal ranges"
+      ],
+      "priority": 3,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-004",
+      "title": "Implement Equipment Base System",
+      "description": "As a developer, I need a base equipment class so all greenhouse equipment follows a consistent interface.",
+      "acceptanceCriteria": [
+        "EquipmentBase class created in scripts/equipment_base.gd",
+        "Properties: energy_cost (float), active (bool)",
+        "Methods: activate(), deactivate(), can_activate(), _on_activate(), _on_deactivate()",
+        "Equipment can only activate if can_activate() returns true",
+        "Signal emitted when equipment state changes",
+        "Unit tests for equipment base functionality"
+      ],
+      "priority": 4,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-005",
+      "title": "Create Heat Pump Equipment",
+      "description": "As a player, I need a heat pump to increase greenhouse temperature when it gets too cold for the plants.",
+      "acceptanceCriteria": [
+        "HeatPump class extends EquipmentBase",
+        "Increases temperature when active (configurable rate)",
+        "Has visual indicator (sprite/icon) in game",
+        "Clickable/toggleable UI control",
+        "Consumes energy when active",
+        "Unit tests for temperature increase logic"
+      ],
+      "priority": 5,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-006",
+      "title": "Create Fan Equipment",
+      "description": "As a player, I need a fan to decrease temperature and humidity when conditions get too hot or moist.",
+      "acceptanceCriteria": [
+        "Fan class extends EquipmentBase",
+        "Decreases temperature when active (configurable rate)",
+        "Decreases humidity when active (configurable rate)",
+        "Visual indicator and clickable UI control",
+        "Consumes energy when active",
+        "Unit tests for dual effect (temp + humidity reduction)"
+      ],
+      "priority": 6,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-007",
+      "title": "Create Vent Equipment",
+      "description": "As a player, I need a vent to decrease temperature, humidity, and CO2 levels.",
+      "acceptanceCriteria": [
+        "Vent class extends EquipmentBase",
+        "Decreases temperature, humidity, and CO2 when active",
+        "Visual indicator and clickable UI control",
+        "Consumes energy when active",
+        "Unit tests for multi-stat reduction logic"
+      ],
+      "priority": 7,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-008",
+      "title": "Create Irrigation Equipment",
+      "description": "As a player, I need irrigation to increase humidity and provide water to plants.",
+      "acceptanceCriteria": [
+        "Irrigation class extends EquipmentBase",
+        "Increases humidity when active (configurable rate)",
+        "Provides water resource for plant growth",
+        "Visual indicator and clickable UI control",
+        "Consumes energy when active",
+        "Unit tests for humidity increase and water provision"
+      ],
+      "priority": 8,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-009",
+      "title": "Create Greenhouse Tilemap",
+      "description": "As a player, I need a visual greenhouse environment with ground, walls, and benches so the game world is recognizable.",
+      "acceptanceCriteria": [
+        "Tilemap scene created with ground layer",
+        "Greenhouse walls and structure visible",
+        "Plant benches/beds positioned for crops",
+        "Y-sorting configured for proper depth rendering",
+        "Basic placeholder art (can be improved later)",
+        "Scene loads correctly in main.tscn"
+      ],
+      "priority": 9,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-010",
+      "title": "Implement Tomato Plant Growth",
+      "description": "As a player, I want to grow a tomato plant through multiple stages so there's a goal to achieve.",
+      "acceptanceCriteria": [
+        "TomatoPlant class created with growth stages enum",
+        "Growth stages: Seedling, Vegetative, Flowering, Fruiting, Harvest",
+        "Each stage has optimal temperature/humidity ranges",
+        "Growth rate affected by environmental conditions",
+        "Plant health system (can die if conditions are poor)",
+        "Visual representation of each growth stage",
+        "Unit tests for growth logic and stage transitions"
+      ],
+      "priority": 10,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-011",
+      "title": "Add Win/Lose Conditions",
+      "description": "As a player, I need clear win and lose conditions so I know when I've succeeded or failed.",
+      "acceptanceCriteria": [
+        "Win condition: Tomato reaches harvest stage",
+        "Lose condition: Tomato plant dies (health reaches 0)",
+        "Win/Lose screen or modal displayed",
+        "Option to restart game after win/lose",
+        "Game state tracking (playing, won, lost)",
+        "Unit tests for win/lose detection"
+      ],
+      "priority": 11,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-012",
+      "title": "Create Equipment Control Panel UI",
+      "description": "As a player, I need a control panel to toggle equipment on/off so I can manage the greenhouse.",
+      "acceptanceCriteria": [
+        "Control panel UI scene with all equipment buttons",
+        "Each equipment has on/off toggle button",
+        "Visual feedback showing active/inactive state",
+        "Energy consumption display",
+        "Clicking button activates/deactivates equipment",
+        "Responsive layout that works on web export"
+      ],
+      "priority": 12,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-013",
+      "title": "Configure Web Export",
+      "description": "As a developer, I need the game configured for web export so it can be easily shared and played in browsers.",
+      "acceptanceCriteria": [
+        "Export template configured for Web platform",
+        "export_presets.cfg created with web settings",
+        "Game exports successfully to HTML5",
+        "All scenes and resources included in export",
+        "Tested in browser (Chrome/Firefox)",
+        "Responsive scaling for different screen sizes"
+      ],
+      "priority": 13,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    },
+    {
+      "id": "US-014",
+      "title": "Add Sound Effects and Polish",
+      "description": "As a player, I want sound effects and visual polish so the game feels complete and engaging.",
+      "acceptanceCriteria": [
+        "Equipment activation sound effects",
+        "Background ambient sound (greenhouse atmosphere)",
+        "UI button click sounds",
+        "Win/lose jingles",
+        "Smooth animations for equipment state changes",
+        "Particle effects for equipment (steam, water, etc.)"
+      ],
+      "priority": 14,
+      "passes": false,
+      "inProgress": false,
+      "completed": true
+    }
+  ]
+}
