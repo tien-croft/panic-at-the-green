@@ -29,7 +29,9 @@ jobs:
     - name: Install GUT
       run: |
         mkdir -p addons
-        git clone --depth 1 --branch godot_4_6 https://github.com/bitwes/Gut.git addons/gut
+        git clone --depth 1 --branch godot_4_6 https://github.com/bitwes/Gut.git /tmp/gut
+        cp -r /tmp/gut/addons/gut addons/
+        rm -rf /tmp/gut
         ls -la addons/gut/
 
     - name: Run Tests
@@ -85,7 +87,9 @@ jobs:
     - name: Install GUT
       run: |
         mkdir -p addons
-        git clone --depth 1 --branch godot_4_6 https://github.com/bitwes/Gut.git addons/gut
+        git clone --depth 1 --branch godot_4_6 https://github.com/bitwes/Gut.git /tmp/gut
+        cp -r /tmp/gut/addons/gut addons/
+        rm -rf /tmp/gut
 
     - name: Create Build Directory
       run: mkdir -p build
