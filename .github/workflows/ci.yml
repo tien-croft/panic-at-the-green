@@ -30,10 +30,11 @@ jobs:
       run: |
         mkdir -p addons
         git clone --depth 1 --branch godot_4_6 https://github.com/bitwes/Gut.git addons/gut
+        ls -la addons/gut/
 
     - name: Run Tests
       run: |
-        godot --headless -s addons/gut/gut_cmdln.gd --path $PWD
+        godot --headless -s addons/gut/gut_cmdln.gd
       timeout-minutes: 5
 
     - name: Upload Test Results
