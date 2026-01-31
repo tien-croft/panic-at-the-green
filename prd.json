@@ -33,7 +33,7 @@
       "priority": 2,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-003",
@@ -50,7 +50,7 @@
       "priority": 3,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-004",
@@ -67,7 +67,7 @@
       "priority": 4,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-005",
@@ -84,7 +84,7 @@
       "priority": 5,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-006",
@@ -101,7 +101,7 @@
       "priority": 6,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-007",
@@ -117,7 +117,7 @@
       "priority": 7,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-008",
@@ -134,7 +134,7 @@
       "priority": 8,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-009",
@@ -151,7 +151,7 @@
       "priority": 9,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-010",
@@ -169,7 +169,7 @@
       "priority": 10,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-011",
@@ -186,7 +186,7 @@
       "priority": 11,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-012",
@@ -203,7 +203,7 @@
       "priority": 12,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-013",
@@ -220,7 +220,7 @@
       "priority": 13,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     },
     {
       "id": "US-014",
@@ -237,7 +237,7 @@
       "priority": 14,
       "passes": false,
       "inProgress": false,
-      "completed": true
+      "completed": false
     }
   ]
 }
