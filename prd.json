@@ -65,9 +65,9 @@
         "Unit tests for equipment base functionality"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
       "inProgress": false,
-      "completed": false
+      "completed": true
     },
     {
       "id": "US-005",
