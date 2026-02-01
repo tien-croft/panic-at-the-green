@@ -48,9 +48,9 @@
         "Visual feedback when values are outside optimal ranges"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "inProgress": false,
-      "completed": false
+      "completed": true
     },
     {
       "id": "US-004",

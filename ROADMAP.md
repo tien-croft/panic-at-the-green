@@ -6,7 +6,7 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 
 ## Current Status
 
-**Next Task**: US-003 - Build Environment Stats UI
+**Next Task**: US-004 - Implement Equipment Base System
 
 ## Task Board
 
@@ -14,7 +14,7 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 |:---|:---|:---|:---|:---|
 | US-001 | Initialize Godot Project Structure | opencode | ✅ Complete | Basic structure ready |
 | US-002 | Create Simulation Core Singleton | opencode | ✅ Complete | All tests passing |
-| US-003 | Build Environment Stats UI | — | ⏳ Pending | — |
+| US-003 | Build Environment Stats UI | opencode | ✅ Complete | UI in top-right, 13 tests |
 | US-004 | Implement Equipment Base System | — | ⏳ Pending | — |
 | US-005 | Create Heat Pump Equipment | — | ⏳ Pending | — |
 | US-006 | Create Fan Equipment | — | ⏳ Pending | — |
@@ -30,6 +30,40 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 ## Lessons Learned & Blockers
 
 ### Session Log
+
+#### 2026-02-02 - Build Environment Stats UI (US-003)
+**Agent**: opencode
+**Task**: Create UI to display temperature and humidity from Simulation singleton
+**Status**: ✅ Complete
+
+**What was done**:
+- Created `scripts/environment_ui.gd` as a Control class that displays environmental stats
+- Created `scenes/environment_ui.tscn` with temperature and humidity labels in top-right corner
+- Connected to Simulation singleton signals for real-time updates
+- Implemented color-coded feedback (neutral/warning) when values outside optimal ranges
+- Created comprehensive unit tests in `tests/unit/test_environment_ui.gd` (13 tests)
+- Updated `scenes/main.tscn` to include EnvironmentUI in a CanvasLayer
+- All 34 tests passing, formatting and linting verified
+
+**Key decisions**:
+- UI positioned in top-right corner for easy visibility (offset 20px from edges)
+- Used unique node names (%) for reliable references in the scene
+- Optimal ranges: 18-25°C for temperature, 60-80% for humidity
+- Color coding: neutral (light gray) for optimal, warning (yellow) for out of range
+- Format: one decimal place (e.g., "22.5°C", "65.0%")
+- Added getter methods for labels to facilitate testing
+- Disabled simulation decay in tests to avoid floating-point precision issues
+
+**Test coverage**:
+- Initialization and node references
+- Initial value display from Simulation
+- Real-time updates via signals (temperature and humidity)
+- Display formatting (one decimal place)
+- Color changes for values outside optimal ranges
+- Multiple rapid updates handling
+- Signal disconnection cleanup
+
+**Blockers encountered**: None
 
 #### 2026-02-01 - Create Simulation Core Singleton (US-002)
 **Agent**: opencode

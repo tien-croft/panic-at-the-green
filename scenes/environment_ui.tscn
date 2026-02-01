@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8yvxg3ulq3a"]
+
+[ext_resource type="Script" path="res://scripts/environment_ui.gd" id="1_y2r3d"]
+
+[node name="EnvironmentUI" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 100.0
+grow_horizontal = 0
+script = ExtResource("1_y2r3d")
+use_colors = true
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TemperatureRow" type="HBoxContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="TemperatureIcon" type="TextureRect" parent="Background/VBoxContainer/TemperatureRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TemperatureLabel" type="Label" parent="Background/VBoxContainer/TemperatureRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "20.0°C"
+vertical_alignment = 1
+
+[node name="HumidityRow" type="HBoxContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+
+[node name="HumidityIcon" type="TextureRect" parent="Background/VBoxContainer/HumidityRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="HumidityLabel" type="Label" parent="Background/VBoxContainer/HumidityRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "50.0%"
+vertical_alignment = 1
