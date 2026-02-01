@@ -2,12 +2,12 @@ name: CI
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -20,135 +20,135 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Setup Godot
-      uses: chickensoft-games/setup-godot@v1
-      with:
-        version: ${{ env.GODOT_VERSION }}
-        use-dotnet: false
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v1
+        with:
+          version: ${{ env.GODOT_VERSION }}
+          use-dotnet: false
 
-    - name: Verify Godot Installation
-      run: godot --version
+      - name: Verify Godot Installation
+        run: godot --version
 
-    - name: Install GUT
-      run: |
-        mkdir -p addons
-        git clone --depth 1 --branch godot_4_6 https://github.com/bitwes/Gut.git /tmp/gut
-        cp -r /tmp/gut/addons/gut addons/
-        rm -rf /tmp/gut
-        ls -la addons/gut/
+      - name: Install GUT
+        run: |
+          mkdir -p addons
+          git clone --depth 1 --branch godot_4_6 https://github.com/bitwes/Gut.git /tmp/gut
+          cp -r /tmp/gut/addons/gut addons/
+          rm -rf /tmp/gut
+          ls -la addons/gut/
 
-    - name: Run Tests
-      run: |
-        godot --headless -s addons/gut/gut_cmdln.gd
-      timeout-minutes: 5
+      - name: Run Tests
+        run: |
+          godot --headless -s addons/gut/gut_cmdln.gd
+        timeout-minutes: 5
 
-    - name: Upload Test Results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-results
-        path: .gut_stats.json
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: .gut_stats.json
 
   lint:
     name: Lint GDScript
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.x'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
 
-    - name: Install gdtoolkit
-      run: |
-        pip install gdtoolkit
+      - name: Install gdtoolkit
+        run: |
+          pip install gdtoolkit
 
-    - name: Check Formatting
-      run: |
-        gdformat --check scripts/ tests/ || (echo "Run 'make format' locally to fix"; exit 1)
-      continue-on-error: true
+      - name: Check Formatting
+        run: |
+          gdformat --check scripts/ tests/ || (echo "Run 'make format' locally to fix"; exit 1)
+        continue-on-error: true
 
-    - name: Run Linter
-      run: |
-        gdlint scripts/ tests/
-      continue-on-error: true
+      - name: Run Linter
+        run: |
+          gdlint scripts/ tests/
+        continue-on-error: true
 
   build-web:
     name: Build Web Export
     runs-on: ubuntu-latest
     needs: [test, lint]
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Setup Godot
-      uses: chickensoft-games/setup-godot@v1
-      with:
-        version: ${{ env.GODOT_VERSION }}
-        use-dotnet: false
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v1
+        with:
+          version: ${{ env.GODOT_VERSION }}
+          use-dotnet: false
 
-    - name: Install GUT
-      run: |
-        mkdir -p addons
-        git clone --depth 1 --branch godot_4_6 https://github.com/bitwes/Gut.git /tmp/gut
-        cp -r /tmp/gut/addons/gut addons/
-        rm -rf /tmp/gut
+      - name: Install GUT
+        run: |
+          mkdir -p addons
+          git clone --depth 1 --branch godot_4_6 https://github.com/bitwes/Gut.git /tmp/gut
+          cp -r /tmp/gut/addons/gut addons/
+          rm -rf /tmp/gut
 
-    - name: Create Build Directory
-      run: mkdir -p build
+      - name: Create Build Directory
+        run: mkdir -p build
 
-    - name: Download and Install Export Templates
-      run: |
-        # Extract major.minor version (e.g., 4.6.0 -> 4.6)
-        GODOT_VERSION_SHORT=$(echo "$GODOT_VERSION" | sed 's/\.[^.]*$//')
-        EXPORT_TEMPLATE_VERSION="${GODOT_VERSION_SHORT}.stable"
-        TEMPLATE_URL="https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION_SHORT}-stable/Godot_v${GODOT_VERSION_SHORT}-stable_export_templates.tpz"
-        TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${EXPORT_TEMPLATE_VERSION}"
+      - name: Download and Install Export Templates
+        run: |
+          # Extract major.minor version (e.g., 4.6.0 -> 4.6)
+          GODOT_VERSION_SHORT=$(echo "$GODOT_VERSION" | sed 's/\.[^.]*$//')
+          EXPORT_TEMPLATE_VERSION="${GODOT_VERSION_SHORT}.stable"
+          TEMPLATE_URL="https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION_SHORT}-stable/Godot_v${GODOT_VERSION_SHORT}-stable_export_templates.tpz"
+          TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${EXPORT_TEMPLATE_VERSION}"
 
-        echo "Downloading export templates from $TEMPLATE_URL"
-        mkdir -p "$TEMPLATE_DIR"
-        curl -L --retry 3 --retry-delay 5 "$TEMPLATE_URL" -o /tmp/godot_templates.tpz
+          echo "Downloading export templates from $TEMPLATE_URL"
+          mkdir -p "$TEMPLATE_DIR"
+          curl -L --retry 3 --retry-delay 5 "$TEMPLATE_URL" -o /tmp/godot_templates.tpz
 
-        echo "Extracting templates..."
-        unzip -q /tmp/godot_templates.tpz -d /tmp/templates
-        rm /tmp/godot_templates.tpz
+          echo "Extracting templates..."
+          unzip -q /tmp/godot_templates.tpz -d /tmp/templates
+          rm /tmp/godot_templates.tpz
 
-        # Find the directory containing the templates (look for version.txt)
-        SOURCE_DIR=$(find /tmp/templates -name "version.txt" -exec dirname {} \; | head -n 1)
+          # Find the directory containing the templates (look for version.txt)
+          SOURCE_DIR=$(find /tmp/templates -name "version.txt" -exec dirname {} \; | head -n 1)
 
-        if [ -z "$SOURCE_DIR" ]; then
-          echo "version.txt not found, looking for web_debug.zip"
-          SOURCE_DIR=$(find /tmp/templates -name "web_debug.zip" -exec dirname {} \; | head -n 1)
-        fi
+          if [ -z "$SOURCE_DIR" ]; then
+            echo "version.txt not found, looking for web_debug.zip"
+            SOURCE_DIR=$(find /tmp/templates -name "web_debug.zip" -exec dirname {} \; | head -n 1)
+          fi
 
-        if [ -n "$SOURCE_DIR" ]; then
-          echo "Found templates in $SOURCE_DIR"
-          mv "$SOURCE_DIR"/* "$TEMPLATE_DIR/"
-        else
-          echo "ERROR: Could not find templates directory in extracted archive"
-          ls -R /tmp/templates
-          exit 1
-        fi
+          if [ -n "$SOURCE_DIR" ]; then
+            echo "Found templates in $SOURCE_DIR"
+            mv "$SOURCE_DIR"/* "$TEMPLATE_DIR/"
+          else
+            echo "ERROR: Could not find templates directory in extracted archive"
+            ls -R /tmp/templates
+            exit 1
+          fi
 
-        rm -rf /tmp/templates
+          rm -rf /tmp/templates
 
-        echo "Templates installed to $TEMPLATE_DIR"
-        ls -la "$TEMPLATE_DIR"
+          echo "Templates installed to $TEMPLATE_DIR"
+          ls -la "$TEMPLATE_DIR"
 
-    - name: Build Web Export
-      run: |
-        godot --headless --export-release "Web" ./build/index.html
-      timeout-minutes: 10
+      - name: Build Web Export
+        run: |
+          godot --headless --export-release "Web" ./build/index.html
+        timeout-minutes: 10
 
-    - name: Upload Build Artifact
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: web-export
-        path: build/
-        if-no-files-found: warn
+      - name: Upload Build Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-export
+          path: build/
+          if-no-files-found: warn
 
   deploy:
     name: Deploy to GitHub Pages
@@ -158,26 +158,23 @@ jobs:
     permissions:
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-    - name: Download Build Artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: web-export
-        path: build/
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web-export
+          path: build/
 
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-      with:
-        enablement: true
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        with:
+          enablement: true
 
-    - name: Upload to GitHub Pages
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: build/
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/
 
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
