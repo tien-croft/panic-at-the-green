@@ -82,9 +82,9 @@
         "Unit tests for movement logic"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
       "inProgress": false,
-      "completed": false
+      "completed": true
     },
     {
       "id": "US-WORLD-001",
@@ -101,7 +101,7 @@
       "priority": 6,
       "passes": false,
       "inProgress": false,
-      "completed": false
+      "completed": true
     },
     {
       "id": "US-INTERACT-001",

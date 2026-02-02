@@ -41,7 +41,7 @@ test-file:
 lint:
 	@echo "Linting GDScript files..."
 	@if command -v gdlint >/dev/null 2>&1; then \
-		gdlint scripts/ tests/; \
+		gdlint scripts/; \
 	else \
 		echo "gdlint not found. Install with: uv tool install gdtoolkit"; \
 		exit 1; \

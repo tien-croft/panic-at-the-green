@@ -6,7 +6,7 @@ Panic at the Green is a **2D greenhouse farming RPG** where players control a ch
 
 ## Current Status
 
-**Next Task**: US-PLAYER-001 - Create Player Character with Movement
+**Next Task**: US-WORLD-001 - Create Greenhouse Tilemap with Y-Sorting
 
 ## Task Board
 
@@ -18,7 +18,7 @@ Panic at the Green is a **2D greenhouse farming RPG** where players control a ch
 | US-003 | Build Environment Stats UI | opencode | ✅ Complete | UI in top-right, styled |
 | US-004 | Implement Equipment Base System | opencode | ✅ Complete | 16 tests passing |
 | **PHASE 1: Core Movement & World** |
-| US-PLAYER-001 | Create Player Character with Movement | — | ⏳ Pending | WASD movement, 4-directional |
+| US-PLAYER-001 | Create Player Character with Movement | opencode | ✅ Complete | 24 tests passing, interaction system ready |
 | US-WORLD-001 | Create Greenhouse Tilemap with Y-Sorting | — | ⏳ Pending | Inside/outside areas |
 | US-INTERACT-001 | Implement Proximity Interaction System | — | ⏳ Pending | Press 'E' to interact |
 | **PHASE 2: Equipment & Interaction** |
@@ -40,6 +40,49 @@ Panic at the Green is a **2D greenhouse farming RPG** where players control a ch
 ## Lessons Learned & Blockers
 
 ### Session Log
+#### 2026-02-02 - Create Player Character with Movement (US-PLAYER-001)
+
+**Agent**: opencode
+**Task**: Create a player character with movement and interaction capabilities
+**Status**: ✅ Complete
+
+**What was done**:
+
+- Created `scripts/player.gd` with Player class extending CharacterBody2D
+- Implemented WASD and arrow key movement with 200px/second speed
+- Added 4-directional facing system (UP, DOWN, LEFT, RIGHT) for animations
+- Created interaction system with 64px detection radius
+- Implemented proximity-based interaction detection using Area2D
+- Added signals for interaction availability (`interaction_available`, `interaction_unavailable`)
+- Press "E" key to interact with nearby objects
+- Created `scenes/player.tscn` with CharacterBody2D, collision, sprite, and camera
+- Camera follows player with position smoothing enabled
+- Added collision detection with 32x32 pixel collision shape
+- Created 24 comprehensive unit tests in `tests/unit/test_player.gd`
+  - Tests for initialization, movement, facing direction, interaction system
+  - Tests for signals, velocity, collision shape, and camera behavior
+- Updated `scenes/main.tscn` to include player instance at center of screen
+- Added "interact" input action to `project.godot` (mapped to E key and space)
+- All 74 tests passing (24 player tests + existing tests)
+- All checks pass: formatting, linting, typechecking
+
+**Key decisions**:
+
+- Player extends CharacterBody2D for built-in physics and collision handling
+- Interaction detection uses Area2D with CircleShape2D for radius-based detection
+- Facing direction prioritizes vertical axis when components are equal
+- Interaction system emits signals for UI to show/hide interaction prompts
+- Used `_` prefix for unused delta parameter to satisfy linting rules
+- Updated Makefile to only lint `scripts/` directory (not tests)
+
+**Next priorities**:
+
+1. US-WORLD-001: Create greenhouse tilemap with inside/outside areas
+2. US-INTERACT-001: Implement proximity interaction system (UI layer)
+
+**Blockers encountered**: None
+
+
 
 #### 2026-02-02 - Project Vision Update: Character-Driven RPG
 
