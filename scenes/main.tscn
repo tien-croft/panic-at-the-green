@@ -1,3 +1,16 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" uid="uid://c8yvxg3ulq3a" path="res://scenes/environment_ui.tscn" id="1_ui8a2"]
 
 [node name="Main" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EnvironmentUI" parent="CanvasLayer" instance=ExtResource("1_ui8a2")"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 120.0
