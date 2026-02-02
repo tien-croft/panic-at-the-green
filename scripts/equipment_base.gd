@@ -1,9 +1,10 @@
 class_name EquipmentBase
-extends Node
+extends Interactable
 
 ## Base class for all greenhouse equipment.
 ## Provides a consistent interface for equipment activation/deactivation.
 ## Subclasses should override can_activate(), _on_activate(), and _on_deactivate().
+## Inherits from Interactable so equipment can be interacted with by the player.
 
 ## Emitted when the equipment's active state changes.
 ## Passes the new active state (true if activated, false if deactivated).
@@ -17,7 +18,9 @@ var active: bool = false
 
 
 func _ready() -> void:
-	pass
+	super._ready()
+	interaction_name = "Equipment"
+	interaction_description = "Press E to toggle equipment"
 
 
 ## Attempts to activate the equipment.
@@ -72,3 +75,11 @@ func _set_active(value: bool) -> void:
 ## Emits state_changed signal if value changes.
 func set_active(value: bool) -> void:
 	_set_active(value)
+
+
+## Override from Interactable - toggles equipment when interacted with.
+func _on_interact(_interactor: Node2D) -> void:
+	if active:
+		deactivate()
+	else:
+		activate()

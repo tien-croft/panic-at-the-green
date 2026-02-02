@@ -3,9 +3,10 @@ extends GutTest
 
 ## Test suite for EquipmentBase functionality
 
+const InteractableScript := preload("res://scripts/interactable.gd")
 const EquipmentBaseScript := preload("res://scripts/equipment_base.gd")
 
-var equipment: EquipmentBaseScript = null
+var equipment: Node = null
 
 
 func before_each() -> void:

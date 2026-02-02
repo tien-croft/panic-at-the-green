@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="PackedScene" uid="uid://c8yvxg3ulq3a" path="res://scenes/environment_ui.tscn" id="1_ui8a2"]
 [ext_resource type="PackedScene" uid="uid://player12345678" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://interactionui123" path="res://scenes/interaction_ui.tscn" id="3_interactionui"]
 
 [node name="Main" type="Node2D"]
 
@@ -18,3 +19,6 @@ offset_left = -220.0
 offset_top = 20.0
 offset_right = -20.0
 offset_bottom = 120.0
+
+[node name="InteractionUI" parent="CanvasLayer" instance=ExtResource("3_interactionui")]
+player = NodePath("../../Player")
