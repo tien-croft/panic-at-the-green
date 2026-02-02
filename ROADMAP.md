@@ -15,7 +15,7 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 | US-001 | Initialize Godot Project Structure | opencode | ✅ Complete | Basic structure ready |
 | US-002 | Create Simulation Core Singleton | opencode | ✅ Complete | All tests passing |
 | US-003 | Build Environment Stats UI | opencode | ✅ Complete | UI in top-right, 13 tests |
-| US-004 | Implement Equipment Base System | — | ⏳ Pending | — |
+| US-004 | Implement Equipment Base System | opencode | ✅ Complete | 16 tests passing |
 | US-005 | Create Heat Pump Equipment | — | ⏳ Pending | — |
 | US-006 | Create Fan Equipment | — | ⏳ Pending | — |
 | US-007 | Create Vent Equipment | — | ⏳ Pending | — |
@@ -31,6 +31,42 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 
 ### Session Log
 
+#### 2026-02-02 - Implement Equipment Base System (US-004)
+**Agent**: opencode
+**Task**: Create base equipment class so all greenhouse equipment follows a consistent interface
+**Status**: ✅ Complete
+
+**What was done**:
+- Created `scripts/equipment_base.gd` with EquipmentBase class
+- Implemented properties: `energy_cost` (float, default 1.0), `active` (bool, default false)
+- Implemented methods: `activate()`, `deactivate()`, `can_activate()`, `_on_activate()`, `_on_deactivate()`
+- Added `set_active()` method for direct state changes with signal emission
+- Equipment only activates if `can_activate()` returns true (guard condition)
+- Added `state_changed` signal that emits with the new active state (bool parameter)
+- Created comprehensive unit tests in `tests/unit/test_equipment_base.gd` (16 tests)
+- All tests passing, formatting and linting verified with `make check`
+
+**Key decisions**:
+- Equipment extends Node (not Autoload) since equipment will be instanced per scene
+- `can_activate()`, `_on_activate()`, `_on_deactivate()` are virtual methods meant for subclass override
+- Signal only emits when state actually changes (not on redundant activate/deactivate calls)
+- Direct property setting (`active = true`) doesn't emit signals - use `set_active()` for that
+- Pattern mirrors SimulationCore design for consistency
+
+**Test coverage**:
+- Initial state (inactive by default, energy_cost = 1.0)
+- Activation/deactivation behavior
+- Signal emission on state changes
+- No signal emission when already in target state
+- `can_activate()` returning false prevents activation
+- Callback methods (`_on_activate`, `_on_deactivate`) invoked correctly
+- Direct property setting vs `set_active()` behavior
+- Energy cost modification
+
+**Blockers encountered**: None
+- All acceptance criteria met
+- Tests, formatting, and linting all pass
+- 
 #### 2026-02-02 - Build Environment Stats UI Re-verification (US-003)
 **Agent**: opencode
 **Task**: Re-verify Environment UI implementation is complete and all checks pass
