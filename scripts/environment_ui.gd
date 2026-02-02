@@ -10,10 +10,13 @@ const OPTIMAL_TEMP_MAX: float = 25.0
 const OPTIMAL_HUMID_MIN: float = 60.0
 const OPTIMAL_HUMID_MAX: float = 80.0
 
-const COLOR_OPTIMAL: Color = Color(0.2, 0.8, 0.2, 1.0)
-const COLOR_WARNING: Color = Color(0.9, 0.7, 0.1, 1.0)
-const COLOR_CRITICAL: Color = Color(0.9, 0.2, 0.2, 1.0)
-const COLOR_NEUTRAL: Color = Color(0.9, 0.9, 0.9, 1.0)
+const COLOR_OPTIMAL: Color = Color(0.0, 1.0, 0.5, 1.0)
+const COLOR_WARNING: Color = Color(1.0, 0.8, 0.0, 1.0)
+const COLOR_CRITICAL: Color = Color(1.0, 0.2, 0.2, 1.0)
+const COLOR_NEUTRAL: Color = Color(1.0, 1.0, 1.0, 1.0)
+
+const ICON_TEMP_COLOR: Color = Color(1.0, 0.4, 0.0, 1.0)
+const ICON_HUMID_COLOR: Color = Color(0.0, 0.6, 1.0, 1.0)
 
 @export var use_colors: bool = true
 
@@ -21,8 +24,8 @@ var _simulation: SimulationCore
 
 @onready var _temperature_label: Label = %TemperatureLabel
 @onready var _humidity_label: Label = %HumidityLabel
-@onready var _temperature_icon: TextureRect = %TemperatureIcon
-@onready var _humidity_icon: TextureRect = %HumidityIcon
+@onready var _temperature_icon: ColorRect = %TemperatureIcon
+@onready var _humidity_icon: ColorRect = %HumidityIcon
 
 
 func _ready() -> void:

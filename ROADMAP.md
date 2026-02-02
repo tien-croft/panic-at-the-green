@@ -2,34 +2,88 @@
 
 ## Project Overview
 
-Panic at the Green is a 2D greenhouse simulator game that demonstrates the complexity of crop management. Players maintain optimal conditions (temperature, humidity, light, CO2) for growing tomato plants.
+Panic at the Green is a **2D greenhouse farming RPG** where players control a character managing tomato plants through physical exploration, manual tasks, and strategic worker hiring.
 
 ## Current Status
 
-**Next Task**: US-005 - Implement Equipment Base System
+**Next Task**: US-PLAYER-001 - Create Player Character with Movement
 
 ## Task Board
 
-| ID     | Title                              | Assignee | Status      | Notes                     |
-| :----- | :--------------------------------- | :------- | :---------- | :------------------------ |
-| US-001 | Initialize Godot Project Structure | opencode | ✅ Complete | Basic structure ready     |
-| US-002 | Create Simulation Core Singleton   | opencode | ✅ Complete | All tests passing         |
-| US-003 | Build Environment Stats UI         | opencode | ✅ Complete | UI in top-right, 13 tests |
-| US-004 | Implement Equipment Base System    | opencode | ✅ Complete | 16 tests passing          |
-| US-005 | Create Heat Pump Equipment         | —        | ⏳ Pending  | —                         |
-| US-006 | Create Fan Equipment               | —        | ⏳ Pending  | —                         |
-| US-007 | Create Vent Equipment              | —        | ⏳ Pending  | —                         |
-| US-008 | Create Irrigation Equipment        | —        | ⏳ Pending  | —                         |
-| US-009 | Create Greenhouse Tilemap          | —        | ⏳ Pending  | —                         |
-| US-010 | Implement Tomato Plant Growth      | —        | ⏳ Pending  | —                         |
-| US-011 | Add Win/Lose Conditions            | —        | ⏳ Pending  | —                         |
-| US-012 | Create Equipment Control Panel UI  | —        | ⏳ Pending  | —                         |
-| US-013 | Configure Web Export               | —        | ⏳ Pending  | —                         |
-| US-014 | Add Sound Effects and Polish       | —        | ⏳ Pending  | —                         |
+| ID | Title | Assignee | Status | Notes |
+|:---|:---|:---|:---|:---|
+| **FOUNDATION** |
+| US-001 | Initialize Godot Project Structure | opencode | ✅ Complete | Basic structure ready |
+| US-002 | Create Simulation Core Singleton | opencode | ✅ Complete | All tests passing |
+| US-003 | Build Environment Stats UI | opencode | ✅ Complete | UI in top-right, styled |
+| US-004 | Implement Equipment Base System | opencode | ✅ Complete | 16 tests passing |
+| **PHASE 1: Core Movement & World** |
+| US-PLAYER-001 | Create Player Character with Movement | — | ⏳ Pending | WASD movement, 4-directional |
+| US-WORLD-001 | Create Greenhouse Tilemap with Y-Sorting | — | ⏳ Pending | Inside/outside areas |
+| US-INTERACT-001 | Implement Proximity Interaction System | — | ⏳ Pending | Press 'E' to interact |
+| **PHASE 2: Equipment & Interaction** |
+| US-EQUIP-001 | Create Physical Equipment Stations | — | ⏳ Pending | Heat pump, fan, vent, irrigation |
+| US-EQUIP-002 | Implement Equipment Control Interface | — | ⏳ Pending | UI on interaction |
+| US-EQUIP-003 | Add Equipment Maintenance System | — | ⏳ Pending | Breakage and repairs |
+| US-SENSOR-001 | Add Sensor and Monitoring Stations | — | ⏳ Pending | Detailed readings |
+| **PHASE 3: Plants & Tasks** |
+| US-PLANT-001 | Create Tomato Plant System | — | ⏳ Pending | Growth stages, physical plants |
+| US-TASK-001 | Implement Manual Plant Tasks | — | ⏳ Pending | Pruning, watering, transplanting |
+| **PHASE 4: Economy & Workers** |
+| US-ECON-001 | Create Economy and Money System | — | ⏳ Pending | Income and expenses |
+| US-WORKER-001 | Implement Worker Hiring System | — | ⏳ Pending | Hire NPCs to automate |
+| **PHASE 5: Win/Lose & Polish** |
+| US-WIN-001 | Implement Win/Lose and Progression | — | ⏳ Pending | Harvest 10 tomatoes |
+| US-POLISH-001 | Add Visual Polish and Audio | — | ⏳ Pending | Animations, sounds |
+| US-EXPORT-001 | Configure Web Export | — | ⏳ Pending | HTML5 build |
 
 ## Lessons Learned & Blockers
 
 ### Session Log
+
+#### 2026-02-02 - Project Vision Update: Character-Driven RPG
+
+**Agent**: opencode
+**Task**: Update prd.md and prd.json to reflect new character-driven gameplay vision
+**Status**: ✅ Complete
+
+**What was done**:
+
+- Complete rewrite of prd.md to reflect character-driven RPG gameplay
+- Restructured prd.json with 18 new user stories organized in 5 phases:
+  1. Foundation (4 stories - all complete)
+  2. Phase 1: Core Movement & World (3 stories)
+  3. Phase 2: Equipment & Interaction (4 stories)
+  4. Phase 3: Plants & Tasks (2 stories)
+  5. Phase 4: Economy & Workers (2 stories)
+  6. Phase 5: Win/Lose & Polish (3 stories)
+
+**Key changes**:
+
+- **Before**: Abstract simulation with clickable UI controls
+- **After**: Physical character walks around, interacts with objects
+- **New systems**: Worker hiring, economy/money, equipment maintenance
+- **Manual tasks**: Pruning, watering, transplanting done by walking to plants
+- **Art style**: Confirmed Stardew Valley-inspired pixel art with Y-sorting
+- **Gameplay**: Explore → Monitor → Act → Manage → Profit → Maintain
+
+**New core features**:
+
+1. **Player Character**: WASD movement, 4-directional sprites, collision
+2. **Physical Equipment**: Walk to heat pump, fans, irrigation controls
+3. **Interaction System**: Proximity detection, press 'E' to interact
+4. **Manual Tasks**: Watering can, pruning shears, transplanting
+5. **Worker System**: Hire NPCs (Technician, Gardener, Manager) with wages
+6. **Economy**: Money for equipment costs, repairs, wages; earn from selling tomatoes
+7. **Maintenance**: Equipment breaks randomly, needs repair
+
+**Next priorities**:
+
+1. US-PLAYER-001: Player character with movement (foundation for everything)
+2. US-WORLD-001: Greenhouse tilemap with inside/outside areas
+3. US-INTERACT-001: Proximity interaction system
+
+**Blockers encountered**: None
 
 #### 2026-02-02 - Implement Equipment Base System (US-004)
 
@@ -71,7 +125,6 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 
 - All acceptance criteria met
 - Tests, formatting, and linting all pass
--
 
 #### 2026-02-02 - Build Environment Stats UI Re-verification (US-003)
 
@@ -184,7 +237,7 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 - Implemented temperature tracking with getter/setter (float, Celsius)
 - Implemented humidity tracking with getter/setter (float, percentage 0-100)
 - Added signals: `temperature_changed`, `humidity_changed` emitted on value changes
-- Implemented time-based decay system for natural condition drift toward targets
+- Implemented time-based decay system for natural condition drift
 - Created comprehensive unit tests in `tests/unit/test_simulation_core.gd` (21 tests)
 - Updated `project.godot` to register SimulationCore as Autoload
 - Created `.gdlintrc` configuration to exclude test files from certain linting rules
@@ -243,113 +296,6 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 - GUT needs to be installed manually or via `git clone`
 - Export templates need to be downloaded for builds
 
-#### 2026-02-01 - Pre-commit Hooks and uv Setup
-
-**Agent**: opencode
-**Task**: Setup pre-commit hooks and migrate to uv
-**Status**: ✅ Complete
-
-**What was done**:
-
-- Updated Makefile to use `uv tool install` instead of `pip install`
-- Created `.pre-commit-config.yaml` with pre-commit hooks configuration
-- Created `.hooks/` directory with custom hook scripts:
-  - `check-gdformat.sh` - Validates GDScript formatting
-  - `check-gdlint.sh` - Lints GDScript files
-  - `check-godot-files.sh` - Validates Godot project files
-- Added `make install-tools` command to install gdtoolkit via uv
-- Added `make setup-hooks` command to install and configure pre-commit
-- Updated AGENTS.md with uv and pre-commit documentation
-- Updated Makefile help text with new commands
-
-**Key decisions**:
-
-- Using **uv** (from Astral) instead of pip for faster, reliable tool installation
-- Pre-commit hooks run automatically on `git commit` to ensure code quality
-- Hooks check: formatting (gdformat), linting (gdlint), file validation
-
-#### 2026-02-01 - Static Typing, Typecheck, and Ralphy Config Update
-
-**Agent**: opencode
-**Task**: Add typecheck command, update ralphy config for opencode with model preferences
-**Status**: ✅ Complete
-
-**What was done**:
-
-- Added `make typecheck` command to check static typing in GDScript files
-- Created `.hooks/check-typing.sh` pre-commit hook to enforce static typing
-- Updated pre-commit config to run typing check FIRST (before format/lint)
-- Updated `.ralphy/config.yaml` to:
-  - Reference `prd.json` instead of `prd.md`
-  - Configure for **opencode** as primary engine
-  - Document model preferences: kimi-2.5-free (default), glm-4.7-free, minimax-2.1-free (fallbacks)
-  - Add strict static typing rules to ralphy rules section
-  - Update project info (Godot 4.x, GDScript)
-- Enhanced AGENTS.md Type Safety section with REQUIRED label and examples
-- Updated `make check` to include typecheck (format + typecheck + lint + test)
-- Updated quick reference commands in both AGENTS.md and ROADMAP.md
-
-**Key decisions**:
-
-- **Static typing is REQUIRED** - No exceptions, all code must be fully typed
-- Type checking runs **FIRST** in pre-commit hooks (blocks commit if untyped)
-- Ralphy configured to use **opencode** with specific model preferences
-- Model fallback order: kimik-k2.5-free → glm-4.7-free → minimax-2.1-free
-- Usage: `ralphy --opencode --json prd.json --model opencode/kimi-k2.5-free --branch-per-task`
-
-**Blockers encountered**: None
-
-- Note: Godot doesn't have a built-in typechecker, so we use grep-based checks
-- This validates that type annotations are present, not that they're correct
-- Godot editor will catch actual type errors during compilation
-- Can skip hooks with `git commit --no-verify` in emergencies
-- Setup is one-time: `make setup-hooks` then hooks run automatically
-
-**Blockers encountered**: None
-
-#### 2026-02-01 - Update to Godot 4.6
-
-**Agent**: opencode
-**Task**: Update project from Godot 4.2 to Godot 4.6
-**Status**: ✅ Complete
-
-**What was done**:
-
-- Updated `project.godot` - changed `config/features` from "4.2" to "4.6"
-- Updated `.github/workflows/ci.yml` - changed `GODOT_VERSION` from 4.2.2 to 4.6.0
-- Updated `README.md` - changed prerequisite from "4.2 or later" to "4.6 or later"
-- Verified all other documentation references use "Godot 4.x" (which remains correct)
-
-**Key decisions**:
-
-- Project now targets Godot 4.6 as minimum version
-- GitHub Actions CI will use Godot 4.6.0
-- Export templates need to match 4.6.0 version
-
-**Blockers encountered**: None
-
-#### 2026-02-01 - prd.json and AGENTS.md Setup
-
-**Agent**: opencode
-**Task**: Update project documentation to Chief format
-**Status**: ✅ Complete
-
-**What was done**:
-
-- Created comprehensive prd.md with full project context
-- Rewrote prd.json to follow Chief format with 14 user stories
-- Updated AGENTS.md with Godot 4.x/GDScript style guidelines
-- Updated ROADMAP.md with proper tracking format
-
-**Key decisions**:
-
-- Using Chief-style PRD format with userStories array
-- Each story has acceptance criteria, priority, passes, and inProgress flags
-- Agent-based development: one task per instance, fresh context each time
-- US-001 marked complete (project structure already exists)
-
-**Blockers encountered**: None
-
 ## Agent Guidelines
 
 ### For Conductor (You)
@@ -377,7 +323,7 @@ Panic at the Green is a 2D greenhouse simulator game that demonstrates the compl
 
 **Before starting work**:
 
-1. Read `prd.json` to understand the full project
+1. Read `prd.md` to understand the full project
 2. Read `AGENTS.md` for code style guidelines
 3. Read your specific user story from `prd.json`
 4. Check `ROADMAP.md` for any related lessons learned
