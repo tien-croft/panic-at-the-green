@@ -1,15 +1,21 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://irrigation001"]
 
 [ext_resource type="Script" path="res://scripts/equipment/irrigation_panel.gd" id="1_irrigation"]
+[ext_resource type="Texture2D" path="res://assets/sprites/batch-4-transparent.png" id="2_sprite"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irrigation"]
-size = Vector2(32, 48)
+size = Vector2(64, 48)
 
 [node name="IrrigationPanel" type="StaticBody2D"]
+collision_layer = 2
 script = ExtResource("1_irrigation")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sprite")
+region_enabled = true
+region_rect = Rect2(416, 0, 128, 96)
 modulate = Color(0.6, 0.6, 0.6, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_irrigation")

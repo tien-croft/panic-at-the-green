@@ -1,15 +1,21 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://ventstation001"]
 
 [ext_resource type="Script" path="res://scripts/equipment/vent_station.gd" id="1_vent"]
+[ext_resource type="Texture2D" path="res://assets/sprites/batch-4-transparent.png" id="2_sprite"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vent"]
-size = Vector2(32, 24)
+size = Vector2(48, 48)
 
 [node name="VentStation" type="StaticBody2D"]
+collision_layer = 2
 script = ExtResource("1_vent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sprite")
+region_enabled = true
+region_rect = Rect2(224, 0, 96, 96)
 modulate = Color(0.6, 0.6, 0.6, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_vent")
