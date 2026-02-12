@@ -26,6 +26,14 @@ const TEMPERATURE_DECAY_RATE: float = 0.5
 const HUMIDITY_DECAY_RATE: float = 0.3
 const LIGHT_DECAY_RATE: float = 0.8
 
+@export var temperature: float = DEFAULT_TEMPERATURE:
+	set(value):
+		_set_temperature(value)
+
+@export var humidity: float = DEFAULT_HUMIDITY:
+	set(value):
+		_set_humidity(value)
+
 var _current_temperature: float = DEFAULT_TEMPERATURE
 var _current_humidity: float = DEFAULT_HUMIDITY
 var _current_light: float = DEFAULT_LIGHT
@@ -40,14 +48,6 @@ var _simulation_paused: bool = false
 var _day_night_cycle_active: bool = true
 var _day_duration: float = 120.0
 var _day_time: float = 0.0
-
-@export var temperature: float = DEFAULT_TEMPERATURE:
-	set(value):
-		_set_temperature(value)
-
-@export var humidity: float = DEFAULT_HUMIDITY:
-	set(value):
-		_set_humidity(value)
 
 
 func _ready() -> void:

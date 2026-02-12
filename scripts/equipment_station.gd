@@ -5,7 +5,7 @@ extends StaticBody2D
 ## Extends EquipmentBase for functionality and StaticBody2D for physics/collision.
 
 ## Emitted when player interacts with this equipment.
-signal station_interacted(station: EquipmentStation)
+signal station_interacted(station)
 
 ## The type of equipment (for identification and UI).
 enum EquipmentType { HEAT_PUMP, FAN, VENT, IRRIGATION, WATER_TANK }
@@ -28,10 +28,10 @@ enum EquipmentType { HEAT_PUMP, FAN, VENT, IRRIGATION, WATER_TANK }
 ## The underlying equipment logic.
 var equipment: EquipmentBase
 
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var sprite: Sprite2D = get_node_or_null("Sprite2D")
+@onready var collision: CollisionShape2D = get_node_or_null("CollisionShape2D")
 
-@onready var status_light: Sprite2D = $StatusLight
+@onready var status_light: Sprite2D = get_node_or_null("StatusLight")
 
 
 func _ready() -> void:

@@ -23,13 +23,19 @@ func _setup_equipment() -> void:
 
 
 func _process(delta: float) -> void:
-	if is_active() and Simulation:
-		var current_temp: float = Simulation.get_temperature()
+	if not is_active():
+		return
 
-		# Calculate effectiveness based on temperature difference from outside
-		var outside_temp: float = Simulation.OUTSIDE_TEMPERATURE
-		var temp_diff: float = abs(current_temp - outside_temp)
-		var effectiveness: float = clamp(temp_diff / 20.0, min_effectiveness, 1.0)
+	var sim: SimulationCore = Engine.get_singleton("Simulation")
+	if sim == null:
+		return
 
-		var temp_decrease: float = cooling_rate * effectiveness * delta
-		Simulation.set_temperature(current_temp - temp_decrease)
+	var current_temp: float = sim.get_temperature()
+
+	# Calculate effectiveness based on temperature difference from outside
+	var outside_temp: float = sim.OUTSIDE_TEMPERATURE
+	var temp_diff: float = abs(current_temp - outside_temp)
+	var effectiveness: float = clamp(temp_diff / 20.0, min_effectiveness, 1.0)
+
+	var temp_decrease: float = cooling_rate * effectiveness * delta
+	sim.set_temperature(current_temp - temp_decrease)
