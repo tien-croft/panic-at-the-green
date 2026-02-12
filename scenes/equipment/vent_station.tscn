@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment/vent_station.gd" id="1_vent"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vent"]
+size = Vector2(32, 24)
+
+[node name="VentStation" type="StaticBody2D"]
+script = ExtResource("1_vent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.6, 0.6, 0.6, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vent")

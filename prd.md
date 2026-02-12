@@ -28,11 +28,41 @@ Players experience the challenge of maintaining:
 - **Platform**: Web (HTML5) export for easy sharing
 - **Art Style**: **2D Top-down Pixel Art** with Y-sorting (**Stardew Valley** inspired)
   - 16x16 or 32x32 pixel tiles
-  - Bright, saturated colors
-  - Cozy pastoral aesthetic
+  - Modular "Lego" System for plants (Tomato)
   - Character sprites with directional animations
 - **Camera**: Fixed top-down view following the player
 - **Testing**: GUT (Godot Unit Test) framework for automated testing
+
+## Art Assets Plan
+
+### Batch 1: The Player Character (The Anchor)
+- **Goal**: Define the art style and scale.
+- **Content**: 4-directional Farmer (hat/overalls), Idle poses, Walk cycles.
+
+### Batch 2: The Modular Tomato "Lego" System (The Hero Asset)
+- **Goal**: Create stackable segments to build dynamic plants on the cocopeat base.
+- **The Base Unit**: Cocopeat slab sitting on the drainage shell with the irrigation tube plugged in.
+- **Middle Segments (Stackable)**: Tiling vertically on the grid (e.g., 16x16 or 32x32).
+  - **State A**: Pruned Stem (Just stem and string, bare)
+  - **State B**: Vegetative (Stem, string, lush leaves)
+  - **State C**: Flowering (Stem, string, leaves, yellow flower clusters)
+  - **State D**: Fruiting Green (Stem, string, leaves, small green tomatoes)
+  - **State E**: Fruiting Red (Stem, string, leaves, ripe red cherry tomatoes)
+- **Top Segments (Caps)**:
+  - **State A**: Leafy Tip
+  - **State B**: Flowering Tip
+
+### Batch 3: The Greenhouse Structure (Tileset)
+- **Goal**: Build the environment around the plants.
+- **Content**: White floor cover, concrete paths, metal frame walls, glass texture, doors.
+
+### Batch 4: Machinery & Equipment
+- **Goal**: Technical details for environmental control.
+- **Content**: Trutina sensor box, heat pumps, fans, water tank, hanging yellow traps.
+
+### Batch 5: NPCs & UI
+- **Goal**: Final polish.
+- **Content**: The three workers (Technician, Gardener, Manager) and interface elements.
 
 ## Core Gameplay Loop
 

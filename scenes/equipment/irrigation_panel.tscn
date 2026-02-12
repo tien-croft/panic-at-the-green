@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/equipment/irrigation_panel.gd" id="1_irrigation"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_irrigation"]
+size = Vector2(32, 48)
+
+[node name="IrrigationPanel" type="StaticBody2D"]
+script = ExtResource("1_irrigation")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.6, 0.6, 0.6, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_irrigation")
