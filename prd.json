@@ -118,7 +118,7 @@
       "priority": 7,
       "passes": false,
       "inProgress": false,
-      "completed": false
+      "completed": true
     },
     {
       "id": "US-EQUIP-001",
@@ -173,15 +173,15 @@
     },
     {
       "id": "US-PLANT-001",
-      "title": "Create Tomato Plant System",
-      "description": "As a player, I want tomato plants I can physically tend to by walking to them and performing actions.",
+      "title": "Create Tomato Plant System (Modular Lego)",
+      "description": "As a player, I want tomato plants I can physically tend to by walking to them and performing actions, built using a modular tiling system.",
       "acceptanceCriteria": [
-        "TomatoPlant class with growth stages",
-        "Plants placed on benches inside greenhouse",
-        "Visual sprites for each stage (seedling to harvest)",
+        "TomatoPlant class with modular growth segments",
+        "Plants placed on cocopeat slabs inside greenhouse",
+        "Visual segments for each stage (Stem, Vegetative, Flowering, Fruiting)",
+        "Top segments (Caps) for the growing tips",
         "Player can interact with plants to view status",
-        "Shows current health and growth progress",
-        "Unit tests for growth logic"
+        "Unit tests for modular growth logic"
       ],
       "priority": 11,
       "passes": false,
@@ -278,6 +278,7 @@
       "title": "Add Visual Polish and Audio",
       "description": "As a player, I want the game to feel complete with animations, sound effects, and music.",
       "acceptanceCriteria": [
+        "Clean generated art (remove backgrounds, pixelate)",
         "Character walk animations (4 directions)",
         "Equipment animations (spinning fan, flowing water)",
         "Sound effects: footsteps, equipment hum, UI clicks",

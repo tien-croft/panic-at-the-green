@@ -27,7 +27,7 @@ Panic at the Green is a **2D greenhouse farming RPG** where players control a ch
 | US-EQUIP-003 | Add Equipment Maintenance System | — | ⏳ Pending | Breakage and repairs |
 | US-SENSOR-001 | Add Sensor and Monitoring Stations | — | ⏳ Pending | Detailed readings |
 | **PHASE 3: Plants & Tasks** |
-| US-PLANT-001 | Create Tomato Plant System | — | ⏳ Pending | Growth stages, physical plants |
+| US-PLANT-001 | Create Tomato Plant System (Modular Lego) | — | ⏳ Pending | Modular stackable segments |
 | US-TASK-001 | Implement Manual Plant Tasks | — | ⏳ Pending | Pruning, watering, transplanting |
 | **PHASE 4: Economy & Workers** |
 | US-ECON-001 | Create Economy and Money System | — | ⏳ Pending | Income and expenses |
