@@ -8,6 +8,16 @@ var _station: EquipmentStation = null
 func before_each() -> void:
 	_station = EquipmentStation.new()
 	add_child_autofree(_station)
+
+	# Create required child nodes for testing
+	var sprite: Sprite2D = Sprite2D.new()
+	sprite.name = "Sprite2D"
+	_station.add_child(sprite)
+
+	var collision: CollisionShape2D = CollisionShape2D.new()
+	collision.name = "CollisionShape2D"
+	_station.add_child(collision)
+
 	_station._ready()
 
 
@@ -37,20 +47,19 @@ func test_station_creates_equipment_base() -> void:
 
 
 func test_interact_emits_signal() -> void:
-	var signal_emitted: bool = false
-	var received_station: EquipmentStation = null
+	var signal_tracker: Dictionary = {"emitted": false, "station": null}
 
 	_station.station_interacted.connect(
-		func(station: EquipmentStation) -> void:
-			signal_emitted = true
-			received_station = station
+		func(station) -> void:
+			signal_tracker.emitted = true
+			signal_tracker.station = station
 	)
 
 	var mock_player: Node2D = Node2D.new()
 	_station.interact(mock_player)
 
-	assert_true(signal_emitted, "station_interacted signal should be emitted")
-	assert_eq(received_station, _station, "Signal should pass the station instance")
+	assert_true(signal_tracker.emitted, "station_interacted signal should be emitted")
+	assert_eq(signal_tracker.station, _station, "Signal should pass the station instance")
 
 	mock_player.free()
 
@@ -120,15 +129,14 @@ func test_state_change_updates_visual() -> void:
 
 
 func test_equipment_emits_state_changed() -> void:
-	var signal_emitted: bool = false
-	var new_state: bool = false
+	var signal_tracker: Dictionary = {"emitted": false, "state": false}
 
 	_station.equipment.state_changed.connect(
 		func(is_active: bool) -> void:
-			signal_emitted = true
-			new_state = is_active
+			signal_tracker.emitted = true
+			signal_tracker.state = is_active
 	)
 
 	_station.activate()
-	assert_true(signal_emitted)
-	assert_true(new_state)
+	assert_true(signal_tracker.emitted)
+	assert_true(signal_tracker.state)

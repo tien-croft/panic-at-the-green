@@ -23,8 +23,14 @@ func _setup_equipment() -> void:
 
 
 func _process(delta: float) -> void:
-	if is_active() and Simulation:
-		var current_humidity: float = Simulation.get_humidity()
-		if current_humidity < target_humidity:
-			var increase: float = humidity_rate * delta
-			Simulation.set_humidity(current_humidity + increase)
+	if not is_active():
+		return
+
+	var sim: SimulationCore = Engine.get_singleton("Simulation")
+	if sim == null:
+		return
+
+	var current_humidity: float = sim.get_humidity()
+	if current_humidity < target_humidity:
+		var increase: float = humidity_rate * delta
+		sim.set_humidity(current_humidity + increase)

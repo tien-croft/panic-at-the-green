@@ -23,8 +23,14 @@ func _setup_equipment() -> void:
 
 
 func _process(delta: float) -> void:
-	if is_active() and Simulation:
-		var current_temp: float = Simulation.get_temperature()
-		if current_temp < target_temperature:
-			var increase: float = heating_rate * delta
-			Simulation.set_temperature(current_temp + increase)
+	if not is_active():
+		return
+
+	var sim: SimulationCore = Engine.get_singleton("Simulation")
+	if sim == null:
+		return
+
+	var current_temp: float = sim.get_temperature()
+	if current_temp < target_temperature:
+		var increase: float = heating_rate * delta
+		sim.set_temperature(current_temp + increase)

@@ -1,14 +1,19 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://watertank001"]
 
 [ext_resource type="Script" path="res://scripts/equipment/water_tank.gd" id="1_water_tank"]
+[ext_resource type="Texture2D" path="res://assets/sprites/batch-4-transparent.png" id="2_sprite"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tank"]
 size = Vector2(64, 64)
 
 [node name="WaterTank" type="StaticBody2D"]
+collision_layer = 2
 script = ExtResource("1_water_tank")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sprite")
+region_enabled = true
+region_rect = Rect2(480, 288, 128, 128)
 modulate = Color(0.7, 0.7, 1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

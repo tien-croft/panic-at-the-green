@@ -23,12 +23,18 @@ func _setup_equipment() -> void:
 
 
 func _process(delta: float) -> void:
-	if is_active() and Simulation:
-		var current_temp: float = Simulation.get_temperature()
-		var current_humidity: float = Simulation.get_humidity()
+	if not is_active():
+		return
 
-		var temp_decrease: float = cooling_rate * delta
-		var humidity_decrease: float = dehumidify_rate * delta
+	var sim: SimulationCore = Engine.get_singleton("Simulation")
+	if sim == null:
+		return
 
-		Simulation.set_temperature(current_temp - temp_decrease)
-		Simulation.set_humidity(current_humidity - humidity_decrease)
+	var current_temp: float = sim.get_temperature()
+	var current_humidity: float = sim.get_humidity()
+
+	var temp_decrease: float = cooling_rate * delta
+	var humidity_decrease: float = dehumidify_rate * delta
+
+	sim.set_temperature(current_temp - temp_decrease)
+	sim.set_humidity(current_humidity - humidity_decrease)
