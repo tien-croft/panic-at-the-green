@@ -1,5 +1,5 @@
 class_name EquipmentBase
-extends Interactable
+extends "res://scripts/interactable.gd"
 
 ## Base class for all greenhouse equipment.
 ## Provides a consistent interface for equipment activation/deactivation.

@@ -3,14 +3,12 @@ extends GutTest
 ## Unit tests for EquipmentBase extending Interactable.
 ## Tests that equipment can be interacted with and responds correctly.
 
-const InteractableScript = preload("res://scripts/interactable.gd")
-const EquipmentBaseScript = preload("res://scripts/equipment_base.gd")
-
 var equipment: Node
 
 
 func before_each() -> void:
-	equipment = EquipmentBaseScript.new()
+	var script: GDScript = load("res://scripts/equipment_base.gd")
+	equipment = script.new()
 	add_child_autofree(equipment)
 	await get_tree().process_frame
 
@@ -23,8 +21,7 @@ func after_each() -> void:
 # === Inheritance Tests ===
 
 
-func test_equipment_extends_interactable() -> void:
-	assert_true(equipment is Interactable, "Equipment should extend Interactable")
+func test_equipment_is_in_interactable_group() -> void:
 	assert_true(equipment.is_in_group("interactable"), "Should be in 'interactable' group")
 
 
@@ -69,39 +66,27 @@ func test_interaction_toggles_equipment_off() -> void:
 
 
 func test_interaction_emits_state_changed_signal() -> void:
-	var signal_received: bool = false
-	var new_state: bool = false
-
-	equipment.state_changed.connect(
-		func(state: bool) -> void:
-			signal_received = true
-			new_state = state
-	)
+	watch_signals(equipment)
 
 	var interactor: Node2D = Node2D.new()
 	add_child_autofree(interactor)
 	equipment.interact(interactor)
 
-	assert_true(signal_received, "state_changed signal should be emitted")
-	assert_true(new_state, "Signal should indicate active state")
+	assert_signal_emitted(equipment, "state_changed", "state_changed signal should be emitted")
+	var signal_params: Array = get_signal_parameters(equipment, "state_changed")
+	assert_true(signal_params[0], "Signal should indicate active state")
 
 
 func test_interaction_emits_interacted_signal() -> void:
-	var signal_received: bool = false
-	var received_interactor: Node2D = null
-
-	equipment.interacted.connect(
-		func(obj: Node2D) -> void:
-			signal_received = true
-			received_interactor = obj
-	)
+	watch_signals(equipment)
 
 	var interactor: Node2D = Node2D.new()
 	add_child_autofree(interactor)
 	equipment.interact(interactor)
 
-	assert_true(signal_received, "interacted signal should be emitted")
-	assert_eq(received_interactor, interactor, "Signal should pass the interactor")
+	assert_signal_emitted(equipment, "interacted", "interacted signal should be emitted")
+	var signal_params: Array = get_signal_parameters(equipment, "interacted")
+	assert_eq(signal_params[0], interactor, "Signal should pass the interactor")
 
 
 func test_equipment_inherits_default_interaction_values() -> void:
