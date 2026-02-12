@@ -20,7 +20,7 @@ Panic at the Green is a **2D greenhouse farming RPG** where players control a ch
 | **PHASE 1: Core Movement & World** |
 | US-PLAYER-001 | Create Player Character with Movement | opencode | ✅ Complete | 24 tests passing, interaction system ready |
 | US-WORLD-001 | Create Greenhouse Tilemap with Y-Sorting | — | ⏳ Pending | Inside/outside areas |
-| US-INTERACT-001 | Implement Proximity Interaction System | — | ⏳ Pending | Press 'E' to interact |
+| US-INTERACT-001 | Implement Proximity Interaction System | opencode | ✅ Complete | 22 tests passing, interaction UI ready |
 | **PHASE 2: Equipment & Interaction** |
 | US-EQUIP-001 | Create Physical Equipment Stations | — | ⏳ Pending | Heat pump, fan, vent, irrigation |
 | US-EQUIP-002 | Implement Equipment Control Interface | — | ⏳ Pending | UI on interaction |
@@ -40,6 +40,57 @@ Panic at the Green is a **2D greenhouse farming RPG** where players control a ch
 ## Lessons Learned & Blockers
 
 ### Session Log
+#### 2026-02-02 - Implement Proximity Interaction System (US-INTERACT-001)
+
+**Agent**: opencode
+**Task**: Implement proximity interaction system for player to interact with equipment and objects
+**Status**: ✅ Complete
+
+**What was done**:
+
+- Created `scripts/interactable.gd` - Base class for all interactable objects
+  - Provides `interact()` method that emits `interacted` signal
+  - Properties for interaction_name, interaction_description, interaction_enabled
+  - Signals for player_entered_range and player_exited_range
+  - Objects automatically added to "interactable" group
+- Updated `scripts/equipment_base.gd` to extend Interactable
+  - Equipment now automatically in interactable group
+  - Interaction toggles equipment on/off when player presses 'E'
+  - Default interaction text: "Press E to toggle equipment"
+- Created `scripts/interaction_ui.gd` and `scenes/interaction_ui.tscn`
+  - UI shows at bottom of screen when near interactables
+  - Displays "[E]" key prompt and object name/description
+  - Connects to player signals: interaction_available, interaction_unavailable
+  - Shows "Object Name - Description" format when both exist
+- Created `prefabs/heat_pump_station.tscn` as sample equipment station
+  - Red color rect with "HEAT" label
+  - Collision for player interaction detection
+- Updated `scenes/main.tscn` to include InteractionUI with player reference
+- Updated `scripts/player.gd` to detect interactables by group membership
+- Created comprehensive unit tests (22 tests total):
+  - `tests/unit/test_interactable.gd` - 11 tests for Interactable base class
+  - `tests/unit/test_interaction_ui.gd` - 8 tests for InteractionUI
+  - `tests/unit/test_equipment_interactable.gd` - 9 tests for equipment interaction
+- All 77 tests passing (22 new + 55 existing)
+- All checks pass: formatting, linting, typechecking
+
+**Key decisions**:
+
+- Interactable extends Node2D (not Node) so objects have 2D position for proximity
+- EquipmentBase extends Interactable, so all equipment is automatically interactable
+- InteractionUI positioned at bottom-center (not top) to avoid overlap with EnvironmentUI
+- Used "interactable" group membership as primary detection method
+- Player's existing 64px radius = 2 tiles (assuming 32px tiles), meeting acceptance criteria
+- Interaction toggles equipment state (on → off, off → on) for simple UX
+- UI shows combined "Name - Description" when custom description exists
+
+**Next priorities**:
+
+1. US-WORLD-001: Create greenhouse tilemap with Y-sorting
+2. US-EQUIP-001: Create physical equipment stations (heat pump, fan, irrigation)
+
+**Blockers encountered**: None
+
 #### 2026-02-02 - Create Player Character with Movement (US-PLAYER-001)
 
 **Agent**: opencode

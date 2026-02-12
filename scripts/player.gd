@@ -130,8 +130,9 @@ func _on_interaction_detector_body_exited(body: Node2D) -> void:
 
 
 ## Checks if a node is interactable.
+## Returns true if the node is in the "interactable" group or has an "interact" method.
 func _is_interactable(node: Node2D) -> bool:
-	return node.has_method("interact") or node.has_signal("interacted")
+	return node.is_in_group("interactable") or node.has_method("interact")
 
 
 ## Updates the list of nearby interactable objects and emits signals.
