@@ -133,9 +133,9 @@
         "Stations show status (active/inactive) visually"
       ],
       "priority": 8,
-      "passes": false,
+      "passes": true,
       "inProgress": false,
-      "completed": false
+      "completed": true
     },
     {
       "id": "US-EQUIP-002",

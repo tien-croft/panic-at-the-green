@@ -22,7 +22,7 @@ Panic at the Green is a **2D greenhouse farming RPG** where players control a ch
 | US-WORLD-001 | Create Greenhouse Tilemap with Y-Sorting | — | ⏳ Pending | Inside/outside areas |
 | US-INTERACT-001 | Implement Proximity Interaction System | opencode | ✅ Complete | 22 tests passing, interaction UI ready |
 | **PHASE 2: Equipment & Interaction** |
-| US-EQUIP-001 | Create Physical Equipment Stations | — | ⏳ Pending | Heat pump, fan, vent, irrigation |
+| US-EQUIP-001 | Create Physical Equipment Stations | opencode | ✅ Complete | All 5 stations with sprites, collision, status indicators |
 | US-EQUIP-002 | Implement Equipment Control Interface | — | ⏳ Pending | UI on interaction |
 | US-EQUIP-003 | Add Equipment Maintenance System | — | ⏳ Pending | Breakage and repairs |
 | US-SENSOR-001 | Add Sensor and Monitoring Stations | — | ⏳ Pending | Detailed readings |
@@ -40,6 +40,81 @@ Panic at the Green is a **2D greenhouse farming RPG** where players control a ch
 ## Lessons Learned & Blockers
 
 ### Session Log
+#### 2026-02-12 - Create Physical Equipment Stations (US-EQUIP-001)
+
+**Agent**: opencode
+**Task**: Create physical equipment stations that can be placed in the world and interacted with
+**Status**: ✅ Complete
+
+**What was verified**:
+
+All equipment stations already implemented and functional:
+
+1. **Heat Pump Station** (`scenes/equipment/heat_pump.tscn`)
+   - Script: `scripts/equipment/heat_pump.gd`
+   - Function: Increases greenhouse temperature
+   - Location: Outside (position 150, 200 in main.tscn)
+
+2. **Fan Station** (`scenes/equipment/fan_station.tscn`)
+   - Script: `scripts/equipment/fan_station.gd`
+   - Function: Cools and dehumidifies
+   - Location: Greenhouse walls (position 900, 150)
+
+3. **Vent Station** (`scenes/equipment/vent_station.tscn`)
+   - Script: `scripts/equipment/vent_station.gd`
+   - Function: Passive ventilation
+   - Location: Greenhouse walls (position 250, 150)
+
+4. **Irrigation Panel** (`scenes/equipment/irrigation_panel.tscn`)
+   - Script: `scripts/equipment/irrigation_panel.gd`
+   - Function: Controls humidity/watering
+   - Location: Inside greenhouse (position 500, 250)
+
+5. **Water Tank** (`scenes/equipment/water_tank.tscn`)
+   - Script: `scripts/equipment/water_tank.gd`
+   - Function: Stores water (1000L capacity)
+   - Location: Outside (position 150, 500)
+
+**Features verified**:
+
+- ✅ All stations have sprites (using batch-4-transparent.png atlas)
+- ✅ All stations have collision shapes (StaticBody2D with CollisionShape2D)
+- ✅ Visual status indicators implemented:
+  - Sprite color changes (inactive = gray, active = white/full color)
+  - Status light indicator (red = inactive, green = active)
+- ✅ All stations placed in main.tscn under Equipment node
+- ✅ EquipmentStation base class provides consistent interface
+- ✅ Each equipment type extends EquipmentStation with specific functionality
+- ✅ Water tank has unique visual feedback based on water level
+
+**Test coverage**:
+
+- 148 tests passing
+- Equipment station tests: 10 tests covering initialization, signals, state changes
+- Individual equipment tests for HeatPump, FanStation, VentStation, IrrigationPanel, WaterTank
+- All tests verify proper functionality and visual state updates
+
+**Acceptance criteria status**:
+
+- ✅ Heat pump station placed outside
+- ✅ Fan and Vent stations placed on greenhouse walls
+- ✅ Irrigation control panel inside greenhouse
+- ✅ Water tank placed outside
+- ✅ Each station has sprite and collision
+- ✅ Stations show status (active/inactive) visually
+
+**Code quality**:
+
+- All files pass linting and formatting checks
+- Static typing verified throughout
+- 148/148 tests passing
+
+**Next priorities**:
+
+1. US-EQUIP-002: Implement Equipment Control Interface
+2. US-EQUIP-003: Add Equipment Maintenance System
+
+**Blockers encountered**: None
 #### 2026-02-02 - Implement Proximity Interaction System (US-INTERACT-001)
 
 **Agent**: opencode
