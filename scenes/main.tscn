@@ -1,12 +1,34 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="PackedScene" uid="uid://c8yvxg3ulq3a" path="res://scenes/environment_ui.tscn" id="1_ui8a2"]
 [ext_resource type="PackedScene" uid="uid://player12345678" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://heatpump001" path="res://scenes/equipment/heat_pump.tscn" id="3_heatpump"]
+[ext_resource type="PackedScene" uid="uid://fanstation001" path="res://scenes/equipment/fan_station.tscn" id="4_fan"]
+[ext_resource type="PackedScene" uid="uid://ventstation001" path="res://scenes/equipment/vent_station.tscn" id="5_vent"]
+[ext_resource type="PackedScene" uid="uid://irrigation001" path="res://scenes/equipment/irrigation_panel.tscn" id="6_irrigation"]
+[ext_resource type="PackedScene" uid="uid://watertank001" path="res://scenes/equipment/water_tank.tscn" id="7_watertank"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 position = Vector2(576, 324)
+
+[node name="Equipment" type="Node2D" parent="."]
+
+[node name="HeatPump" parent="Equipment" instance=ExtResource("3_heatpump")]
+position = Vector2(150, 200)
+
+[node name="FanStation" parent="Equipment" instance=ExtResource("4_fan")]
+position = Vector2(900, 150)
+
+[node name="VentStation" parent="Equipment" instance=ExtResource("5_vent")]
+position = Vector2(250, 150)
+
+[node name="IrrigationPanel" parent="Equipment" instance=ExtResource("6_irrigation")]
+position = Vector2(500, 250)
+
+[node name="WaterTank" parent="Equipment" instance=ExtResource("7_watertank")]
+position = Vector2(150, 500)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -16,7 +16,7 @@ func after_each() -> void:
 
 
 func test_initial_temperature() -> void:
-	assert_eq(simulation_core.get_temperature(), 20.0, "Default temperature should be 20.0°C")
+	assert_eq(simulation_core.get_temperature(), 22.0, "Default temperature should be 22.0°C")
 
 
 func test_initial_humidity() -> void:
@@ -51,7 +51,7 @@ func test_humidity_signal_emitted() -> void:
 
 func test_temperature_signal_not_emitted_when_same() -> void:
 	watch_signals(simulation_core)
-	simulation_core.set_temperature(20.0)
+	simulation_core.set_temperature(22.0)
 	assert_signal_not_emitted(
 		simulation_core, "temperature_changed", "Signal should not emit when unchanged"
 	)
@@ -157,8 +157,8 @@ func test_humidity_property_setter() -> void:
 
 
 func test_temperature_decay_does_not_change_when_at_target() -> void:
-	simulation_core.set_temperature(20.0)
-	simulation_core.set_target_conditions(20.0, 50.0)
+	simulation_core.set_temperature(22.0)
+	simulation_core.set_target_conditions(22.0, 50.0)
 
 	watch_signals(simulation_core)
 	simulation_core._apply_natural_decay(1.0)
@@ -166,7 +166,7 @@ func test_temperature_decay_does_not_change_when_at_target() -> void:
 	assert_signal_not_emitted(
 		simulation_core, "temperature_changed", "No signal when temp at target"
 	)
-	assert_eq(simulation_core.get_temperature(), 20.0, "Temperature should stay at target")
+	assert_eq(simulation_core.get_temperature(), 22.0, "Temperature should stay at target")
 
 
 func test_humidity_decay_does_not_change_when_at_target() -> void:
