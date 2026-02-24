@@ -3,28 +3,26 @@
 [ext_resource type="Script" path="res://scripts/environment_ui.gd" id="1_y2r3d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_retro"]
-bg_color = Color(0.125, 0.125, 0.125, 1.0)
+bg_color = Color(0.878, 0.835, 0.627, 1.0)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.0, 0.8, 0.4, 1.0)
+border_color = Color(0.36, 0.25, 0.2, 1.0)
 corner_detail = 1
+anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_retro"]
 font_size = 20
-outline_size = 3
-outline_color = Color(0.0, 0.0, 0.0, 1.0)
+font_color = Color(0.36, 0.25, 0.2, 1.0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_header"]
 font_size = 16
-outline_size = 2
-outline_color = Color(0.0, 0.0, 0.0, 1.0)
-font_color = Color(0.0, 0.8, 0.4, 1.0)
+font_color = Color(0.36, 0.25, 0.2, 1.0)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_separator"]
-color = Color(0.0, 0.8, 0.4, 1.0)
-thickness = 2
+color = Color(0.36, 0.25, 0.2, 1.0)
+thickness = 4
 
 
 [node name="EnvironmentUI" type="Control"]

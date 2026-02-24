@@ -77,7 +77,7 @@ All equipment stations already implemented and functional:
 
 **Features verified**:
 
-- ✅ All stations have sprites (using batch-4-transparent.png atlas)
+- ✅ All stations have sprites (using machinery_equipment.png atlas)
 - ✅ All stations have collision shapes (StaticBody2D with CollisionShape2D)
 - ✅ Visual status indicators implemented:
   - Sprite color changes (inactive = gray, active = white/full color)

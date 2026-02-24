@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ventstation001"]
 
 [ext_resource type="Script" path="res://scripts/equipment/vent_station.gd" id="1_vent"]
-[ext_resource type="Texture2D" path="res://assets/sprites/batch-4-transparent.png" id="2_sprite"]
+[ext_resource type="Texture2D" path="res://assets/sprites/machinery_equipment.png" id="2_sprite"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vent"]
 size = Vector2(48, 48)

@@ -1,5 +1,5 @@
 class_name World
-extends YSort
+extends Node2D
 
 ## World scene containing the greenhouse with proper Y-sorting
 ## Ground is separate (below), structures and objects are sorted by Y position
@@ -14,9 +14,10 @@ const GREENHOUSE_HEIGHT: int = 12
 var _entrance_position: Vector2 = Vector2.ZERO
 var _entrance_area: Area2D = null
 
-@onready var ground_layer: TileMapLayer = null
-@onready var structure_layer: TileMapLayer = null
-@onready var benches_layer: TileMapLayer = null
+@onready var ground_layer: Node = null
+@onready var structure_layer: Node = null
+@onready var benches_layer: Node = null
+@onready var floor_rect: ColorRect = $Floor
 
 
 func _ready() -> void:
@@ -48,15 +49,9 @@ func get_entrance_position() -> Vector2:
 
 
 func is_position_inside_greenhouse(pos: Vector2) -> bool:
-	var local_pos: Vector2 = pos - global_position
-	var half_width: float = (GREENHOUSE_WIDTH * TILE_SIZE) / 2.0
-	var half_height: float = (GREENHOUSE_HEIGHT * TILE_SIZE) / 2.0
-	return (
-		local_pos.x > -half_width
-		and local_pos.x < half_width
-		and local_pos.y > -half_height
-		and local_pos.y < half_height
-	)
+	if not floor_rect:
+		return false
+	return floor_rect.get_rect().has_point(floor_rect.to_local(pos))
 
 
 func get_floor_type_at(pos: Vector2) -> String:
