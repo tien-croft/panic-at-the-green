@@ -30,6 +30,9 @@ var facing_direction: Direction = Direction.DOWN
 ## Current movement state.
 var is_moving: bool = false
 
+## List of nearby interactable objects.
+var _nearby_interactables: Array[Node2D] = []
+
 ## Animation variables
 var _animation_timer: float = 0.0
 var _current_frame: int = 0

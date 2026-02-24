@@ -52,7 +52,7 @@ This game was created to showcase the challenges of greenhouse management - the 
    # 5. Enable in Project Settings -> Plugins
 
    # Or manually
-   git clone --depth 1 --branch godot_4 https://github.com/bitwes/Gut.git addons/gut
+   git clone --depth 1 --branch v9.5.0 https://github.com/bitwes/Gut.git addons/gut
    ```
 
 ## Running the Game
@@ -212,7 +212,7 @@ Tasks are defined in `prd.json` following the Chief PRD format:
 If tests fail with "GUT not found":
 
 ```bash
-git clone --depth 1 --branch godot_4 https://github.com/bitwes/Gut.git addons/gut
+git clone --depth 1 --branch v9.5.0 https://github.com/bitwes/Gut.git addons/gut
 ```
 
 ### Export Templates Missing

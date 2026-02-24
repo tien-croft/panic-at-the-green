@@ -127,7 +127,7 @@ If GUT is not installed:
 
 Or install via command line:
 ```bash
-git clone --depth 1 --branch godot_4 https://github.com/bitwes/Gut.git addons/gut
+git clone --depth 1 --branch v9.5.0 https://github.com/bitwes/Gut.git addons/gut
 ```
 
 ## Linting and Formatting

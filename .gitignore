@@ -9,7 +9,7 @@ data_*/
 mono_crash*.trc
 
 # Third-party addons (install via Godot Asset Library or git clone)
-# GUT testing framework: git clone --depth 1 --branch godot_4 https://github.com/bitwes/Gut.git addons/gut
+# GUT testing framework: git clone --depth 1 --branch v9.5.0 https://github.com/bitwes/Gut.git addons/gut
 addons/
 
 # Ralphy AI assistant tool files

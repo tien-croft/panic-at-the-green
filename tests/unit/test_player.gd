@@ -25,8 +25,8 @@ func after_each() -> void:
 
 
 func test_player_initializes_with_correct_defaults() -> void:
-	assert_eq(player.speed, 200.0, "Default speed should be 200.0")
-	assert_eq(player.interaction_radius, 64.0, "Default interaction radius should be 64.0")
+	assert_eq(player.speed, 100.0, "Default speed should be 100.0")
+	assert_eq(player.interaction_radius, 32.0, "Default interaction radius should be 32.0")
 	assert_eq(
 		player.facing_direction,
 		PlayerScript.Direction.DOWN,
@@ -197,7 +197,7 @@ func test_direction_enum_values() -> void:
 func test_player_velocity_updates_with_movement() -> void:
 	# Simulate movement input by setting velocity directly
 	player.velocity = Vector2.RIGHT * player.speed
-	assert_eq(player.velocity, Vector2(200, 0), "Velocity should match speed when moving right")
+	assert_eq(player.velocity, Vector2(100, 0), "Velocity should match speed when moving right")
 
 
 func test_player_velocity_zero_when_stopped() -> void:
@@ -211,7 +211,7 @@ func test_collision_shape_exists() -> void:
 
 	var rect_shape: RectangleShape2D = collision.shape as RectangleShape2D
 	assert_not_null(rect_shape, "Shape should be RectangleShape2D")
-	assert_eq(rect_shape.size, Vector2(32, 32), "Collision shape should be 32x32 pixels")
+	assert_eq(rect_shape.size, Vector2(16, 16), "Collision shape should be 16x16 pixels")
 
 
 func test_camera_follows_player() -> void:
