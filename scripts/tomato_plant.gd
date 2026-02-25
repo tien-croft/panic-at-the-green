@@ -3,17 +3,28 @@ extends Node2D
 
 ## Modular Tomato Plant system using stackable segments.
 
-enum GrowthState {
-	PRUNED,
-	VEGETATIVE,
-	FLOWERING,
-	FRUITING_GREEN,
-	FRUITING_RED
-}
+enum GrowthState { PRUNED, VEGETATIVE, FLOWERING, FRUITING_GREEN, FRUITING_RED }
 
-enum TopState {
-	LEAFY,
-	FLOWERING
+enum TopState { LEAFY, FLOWERING }
+
+const ATLAS_PATH = "res://assets/sprites/tomato_lego_system.png"
+
+# Placeholder regions (to be adjusted for actual spritesheet layout)
+const REGIONS = {
+	"base": Rect2(0, 0, 32, 32),
+	"middle":
+	{
+		GrowthState.PRUNED: Rect2(32, 0, 32, 32),
+		GrowthState.VEGETATIVE: Rect2(64, 0, 32, 32),
+		GrowthState.FLOWERING: Rect2(96, 0, 32, 32),
+		GrowthState.FRUITING_GREEN: Rect2(128, 0, 32, 32),
+		GrowthState.FRUITING_RED: Rect2(160, 0, 32, 32),
+	},
+	"top":
+	{
+		TopState.LEAFY: Rect2(192, 0, 32, 32),
+		TopState.FLOWERING: Rect2(224, 0, 32, 32),
+	}
 }
 
 @export var segment_height: int = 32
@@ -25,24 +36,6 @@ enum TopState {
 @onready var base_sprite: Sprite2D = $Base
 @onready var middle_container: Node2D = $MiddleSegments
 @onready var top_sprite: Sprite2D = $Top
-
-const ATLAS_PATH = "res://assets/sprites/tomato_lego_system.png"
-
-# Placeholder regions (to be adjusted for actual spritesheet layout)
-const REGIONS = {
-	"base": Rect2(0, 0, 32, 32),
-	"middle": {
-		GrowthState.PRUNED: Rect2(32, 0, 32, 32),
-		GrowthState.VEGETATIVE: Rect2(64, 0, 32, 32),
-		GrowthState.FLOWERING: Rect2(96, 0, 32, 32),
-		GrowthState.FRUITING_GREEN: Rect2(128, 0, 32, 32),
-		GrowthState.FRUITING_RED: Rect2(160, 0, 32, 32),
-	},
-	"top": {
-		TopState.LEAFY: Rect2(192, 0, 32, 32),
-		TopState.FLOWERING: Rect2(224, 0, 32, 32),
-	}
-}
 
 
 func _ready() -> void:
