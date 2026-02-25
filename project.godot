@@ -27,8 +27,11 @@ window/stretch/aspect="keep"
 
 [gui]
 
-theme/custom_font="res://assets/fonts/pixel_font.ttf"
 theme/default_font_antialiasing=0
+
+[debug]
+
+gdscript/warnings/exclude_addons=false
 
 [input]
 
