@@ -24,6 +24,9 @@ enum Direction { DOWN, LEFT, RIGHT, UP }
 ## Interaction radius in pixels.
 @export var interaction_radius: float = 64.0
 
+## Animation speed.
+@export var animation_speed: float = 8.0
+
 ## Current facing direction.
 var facing_direction: Direction = Direction.DOWN
 
@@ -36,7 +39,6 @@ var _nearby_interactables: Array[Node2D] = []
 ## Animation variables
 var _animation_timer: float = 0.0
 var _current_frame: int = 0
-@export var animation_speed: float = 8.0
 
 ## Reference to the interaction detector area.
 @onready var interaction_detector: Area2D = $InteractionDetector
@@ -71,22 +73,26 @@ func _update_animation(delta: float) -> void:
 	_animation_timer += delta * animation_speed
 	if _animation_timer >= 1.0:
 		_animation_timer = 0.0
-		_current_frame = (_current_frame + 1) % 4 # Assuming 4 walk frames
+		_current_frame = (_current_frame + 1) % 4  # Assuming 4 walk frames
 		_update_sprite_frame()
 
 
 func _reset_to_idle() -> void:
-	_current_frame = 0 # Assuming frame 0 is idle
+	_current_frame = 0  # Assuming frame 0 is idle
 	_update_sprite_frame()
 
 
 func _update_sprite_frame() -> void:
 	var row: int = 0
 	match facing_direction:
-		Direction.DOWN: row = 0
-		Direction.UP: row = 1
-		Direction.LEFT: row = 2
-		Direction.RIGHT: row = 3
+		Direction.DOWN:
+			row = 0
+		Direction.UP:
+			row = 1
+		Direction.LEFT:
+			row = 2
+		Direction.RIGHT:
+			row = 3
 
 	sprite.frame = (row * sprite.hframes) + _current_frame
 
